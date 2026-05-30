@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="The Old Workshop">
+  <defs>
+    <linearGradient id="bgTheOldWorkshop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b1f1a"/>
+      <stop offset="1" stop-color="#574036"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bgTheOldWorkshop)"/>
+  <circle cx="936" cy="224.00000000000003" r="176" fill="#c79a7a" opacity="0.35"/>
+  <path d="M0 800 L384 440.00000000000006 L660 624 L936 400 L1200 576 L1200 800 Z" fill="#000" opacity="0.22"/>
+  <path d="M0 800 L540 544 L840 680 L1200 528 L1200 800 Z" fill="#000" opacity="0.3"/>
+  <text x="600" y="400" fill="#ffffff" opacity="0.92" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-style="italic" text-anchor="middle" dominant-baseline="middle">The Old Workshop</text>
+  <text x="600" y="472" fill="#ffffff" opacity="0.7" font-family="-apple-system, Segoe UI, Roboto, sans-serif" font-size="26" letter-spacing="3" text-anchor="middle" dominant-baseline="middle">PLACEHOLDER · REPLACE ME</text>
+</svg>

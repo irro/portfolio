@@ -1,0 +1,807 @@
+/* =====================================================================
+   Alex Rivera Photography — Portfolio framework stylesheet
+   ---------------------------------------------------------------------
+   Organized into clearly labelled sections so it is easy to customise:
+     1.  Design tokens (CSS custom properties)
+     2.  Modern reset
+     3.  Base & typography
+     4.  Accessibility helpers
+     5.  Layout (container, sections)
+     6.  Buttons
+     7.  Site header & navigation
+     8.  Hero
+     9.  Gallery grid & figures
+     10. About page
+     11. Contact form
+     12. Site footer
+     13. Lightbox dialog
+     14. Dark colour scheme
+     15. Reduced motion
+   The colour palette meets WCAG 2.1 AA contrast in both light and dark
+   schemes. Adjust the tokens in section 1 to re-skin the whole site.
+   ===================================================================== */
+
+/* 1. Design tokens ---------------------------------------------------- */
+:root {
+  /* Signal to the UA that we support both colour schemes. */
+  color-scheme: light dark;
+
+  /* Type families — system stacks keep the framework dependency-free.
+     Swap these for a web font if you like (see README). */
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-display: Georgia, "Times New Roman", "Iowan Old Style", serif;
+
+  /* Fluid type scale (min, preferred, max). */
+  --step--1: clamp(0.83rem, 0.78rem + 0.25vw, 0.94rem);
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.13rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.44rem, 1.28rem + 0.8vw, 2rem);
+  --step-3: clamp(1.73rem, 1.49rem + 1.2vw, 2.67rem);
+  --step-4: clamp(2.07rem, 1.73rem + 1.7vw, 3.55rem);
+
+  /* Spacing scale. */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+
+  /* Light colour palette (default). */
+  --color-bg: #ffffff;
+  --color-surface: #f4f3f1;
+  --color-text: #1a1a1a;
+  --color-text-muted: #4a4a4a;
+  --color-border: #d9d6d1;
+  --color-accent: #0b5757;
+  --color-accent-hover: #073f3f;
+  --color-on-accent: #ffffff;
+  --color-focus: #b5651d;
+
+  --radius: 4px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+  --transition: 200ms ease;
+
+  --container-max: 75rem; /* 1200px */
+  --measure: 65ch; /* optimal line length for reading */
+}
+
+/* 2. Modern reset ----------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+/* 3. Base & typography ------------------------------------------------ */
+body {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+h2 {
+  font-size: var(--step-3);
+}
+h3 {
+  font-size: var(--step-2);
+}
+h4 {
+  font-size: var(--step-1);
+}
+
+p {
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Visible focus indicator for keyboard users on every interactive
+   element. Uses :focus-visible so a mouse click does not draw a ring. */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* 4. Accessibility helpers ------------------------------------------- */
+/* Visually hidden but available to assistive tech. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link — first focusable element, jumps to <main>. */
+.skip-link {
+  position: absolute;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  z-index: 1000;
+  padding: var(--space-2xs) var(--space-s);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-radius: var(--radius);
+  transform: translateY(-150%);
+  transition: transform var(--transition);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* 5. Layout ----------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-m);
+}
+
+.section {
+  padding-block: var(--space-2xl);
+}
+
+.section--tight {
+  padding-block: var(--space-xl);
+}
+
+.section__header {
+  margin-bottom: var(--space-xl);
+}
+
+.section__eyebrow {
+  display: block;
+  margin-bottom: var(--space-2xs);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.lead {
+  font-size: var(--step-1);
+  color: var(--color-text-muted);
+}
+
+/* Breadcrumb trail (mirrors the BreadcrumbList structured data). */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin: 0;
+  padding-block: var(--space-m);
+  list-style: none;
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  margin-right: var(--space-2xs);
+  color: var(--color-border);
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* 6. Buttons ---------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-m);
+  font-size: var(--step-0);
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition),
+    border-color var(--transition);
+}
+
+.button--primary {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.button--primary:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
+}
+
+.button--ghost {
+  background-color: transparent;
+  color: var(--color-accent);
+}
+
+.button--ghost:hover {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+/* 7. Site header & navigation ---------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding-block: var(--space-s);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--color-text);
+}
+
+.brand svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+/* Navigation toggle (mobile). */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.nav-toggle__bars {
+  position: relative;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  transition: background var(--transition);
+}
+
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+}
+
+.nav-toggle__bars::before {
+  top: -6px;
+}
+.nav-toggle__bars::after {
+  top: 6px;
+}
+
+.primary-nav ul {
+  display: flex;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.primary-nav a {
+  display: inline-block;
+  padding: var(--space-2xs) 0;
+  color: var(--color-text);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.primary-nav a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* aria-current marks the page we are on for sighted and AT users. */
+.primary-nav a[aria-current="page"] {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+@media (max-width: 48rem) {
+  .primary-nav {
+    position: absolute;
+    inset: 100% 0 auto 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+    padding: var(--space-s) var(--space-m) var(--space-m);
+  }
+
+  .primary-nav[hidden] {
+    display: none;
+  }
+
+  .primary-nav ul {
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .primary-nav a {
+    display: block;
+    padding: var(--space-xs) 0;
+  }
+}
+
+@media (min-width: 48.0625rem) {
+  .nav-toggle {
+    display: none;
+  }
+
+  /* Keep nav visible on desktop even if JS toggled [hidden]. */
+  .primary-nav[hidden] {
+    display: block;
+  }
+}
+
+/* 8. Hero ------------------------------------------------------------- */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: min(80vh, 40rem);
+  padding-block: var(--space-3xl);
+  text-align: center;
+  color: #ffffff;
+  background-image: linear-gradient(
+      rgba(10, 12, 14, 0.45),
+      rgba(10, 12, 14, 0.55)
+    ),
+    url("../images/hero.svg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero__content {
+  max-width: 48rem;
+}
+
+.hero h1 {
+  color: #ffffff;
+}
+
+.hero__tagline {
+  margin: var(--space-m) auto var(--space-l);
+  max-width: 40ch;
+  font-size: var(--step-1);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  justify-content: center;
+}
+
+.hero .button--ghost {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.hero .button--ghost:hover {
+  background-color: #ffffff;
+  color: var(--color-text);
+}
+
+/* 9. Gallery grid & figures ------------------------------------------ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery__item {
+  margin: 0;
+}
+
+/* The figure is the positioned container so the <figcaption> can overlay
+   the image while remaining a valid child of <figure>. */
+.gallery__figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.gallery__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gallery__image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform var(--transition), filter var(--transition);
+}
+
+.gallery__item--portrait .gallery__image {
+  aspect-ratio: 2 / 3;
+}
+
+.gallery__figure:hover .gallery__image {
+  transform: scale(1.04);
+  filter: brightness(0.9);
+}
+
+.gallery__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--space-m) var(--space-s) var(--space-s);
+  color: #ffffff;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  font-size: var(--step--1);
+  opacity: 0;
+  transition: opacity var(--transition);
+  /* Let clicks pass through to the link beneath. */
+  pointer-events: none;
+}
+
+/* Reveal the caption on hover and on keyboard focus. */
+.gallery__figure:hover .gallery__caption,
+.gallery__figure:focus-within .gallery__caption {
+  opacity: 1;
+}
+
+.gallery__caption-title {
+  display: block;
+  font-weight: 600;
+  font-size: var(--step-0);
+}
+
+/* 10. About page ------------------------------------------------------ */
+.about-grid {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (min-width: 48rem) {
+  .about-grid {
+    grid-template-columns: 1fr 1.4fr;
+  }
+}
+
+.about-portrait {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.prose > * + * {
+  margin-top: var(--space-s);
+}
+
+.prose :is(h2, h3) {
+  margin-top: var(--space-l);
+}
+
+.prose ul {
+  padding-left: 1.25rem;
+}
+
+.prose li + li {
+  margin-top: var(--space-3xs);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--space-m);
+  margin-top: var(--space-xl);
+  padding: 0;
+  list-style: none;
+}
+
+.stats__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  color: var(--color-accent);
+}
+
+.stats__label {
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+/* 11. Contact form ---------------------------------------------------- */
+.contact-grid {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 48rem) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form {
+  display: grid;
+  gap: var(--space-m);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field .hint {
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+.field :is(input, textarea, select) {
+  width: 100%;
+  padding: var(--space-xs) var(--space-s);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.field :is(input, textarea, select):focus-visible {
+  border-color: var(--color-accent);
+}
+
+.field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.required-mark {
+  color: var(--color-focus);
+}
+
+.contact-details {
+  display: grid;
+  gap: var(--space-m);
+  align-content: start;
+  margin-top: var(--space-m);
+}
+
+.contact-details dt {
+  font-weight: 600;
+}
+
+.contact-details dd {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* 12. Site footer ----------------------------------------------------- */
+.site-footer {
+  margin-top: var(--space-2xl);
+  padding-block: var(--space-xl);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--step--1);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-list {
+  display: flex;
+  gap: var(--space-s);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social-list a {
+  display: inline-flex;
+  padding: var(--space-2xs);
+  color: var(--color-text);
+  border-radius: var(--radius);
+}
+
+.social-list a:hover {
+  color: var(--color-accent);
+}
+
+/* 13. Lightbox dialog ------------------------------------------------- */
+.lightbox {
+  width: min(92vw, 70rem);
+  max-width: 92vw;
+  max-height: 92vh;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+}
+
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.lightbox__figure {
+  margin: 0;
+}
+
+.lightbox__image {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.lightbox__caption {
+  padding: var(--space-s);
+  color: #ffffff;
+  text-align: center;
+  font-size: var(--step--1);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: var(--space-2xs);
+  right: var(--space-2xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.lightbox__close:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* 14. Dark colour scheme --------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #111315;
+    --color-surface: #1c1f22;
+    --color-text: #f2f2f2;
+    --color-text-muted: #c2c2c2;
+    --color-border: #34383c;
+    --color-accent: #4fd1c5;
+    --color-accent-hover: #79e0d6;
+    --color-on-accent: #06231f;
+    --color-focus: #f0a44b;
+  }
+
+  .hero .button--ghost:hover {
+    color: #111315;
+  }
+}
+
+/* 15. Reduced motion -------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

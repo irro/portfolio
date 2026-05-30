@@ -1,0 +1,6 @@
+# Allow all crawlers full access.
+User-agent: *
+Allow: /
+
+# TODO: replace with your real domain.
+Sitemap: https://www.example.com/sitemap.xml

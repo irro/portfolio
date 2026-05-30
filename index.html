@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- TODO: Replace the title, description and "Alex Rivera" branding
+         throughout this file with your own details. See README.md. -->
+    <title>Alex Rivera Photography — Landscape &amp; Portrait Photographer</title>
+    <meta
+      name="description"
+      content="Alex Rivera is a landscape and portrait photographer. Browse a curated portfolio of fine-art prints, editorial work and commissions.">
+    <link rel="canonical" href="https://www.example.com/">
+    <meta name="theme-color" content="#0b5757">
+
+    <!-- Open Graph (social sharing) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alex Rivera Photography">
+    <meta
+      property="og:title"
+      content="Alex Rivera Photography — Landscape &amp; Portrait Photographer">
+    <meta
+      property="og:description"
+      content="A curated portfolio of landscape and portrait photography by Alex Rivera.">
+    <meta property="og:url" content="https://www.example.com/">
+    <meta property="og:image" content="https://www.example.com/images/og-cover.svg">
+    <meta
+      property="og:image:alt"
+      content="Alex Rivera Photography portfolio cover">
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta
+      name="twitter:title"
+      content="Alex Rivera Photography — Landscape &amp; Portrait Photographer">
+    <meta
+      name="twitter:description"
+      content="A curated portfolio of landscape and portrait photography by Alex Rivera.">
+    <meta name="twitter:image" content="https://www.example.com/images/og-cover.svg">
+
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Schema.org structured data: the website, the business and the
+         photographer, linked together with @id references. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.example.com/#website",
+            "url": "https://www.example.com/",
+            "name": "Alex Rivera Photography",
+            "description": "Landscape and portrait photography portfolio.",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://www.example.com/#business" }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.example.com/#business",
+            "name": "Alex Rivera Photography",
+            "image": "https://www.example.com/images/og-cover.svg",
+            "url": "https://www.example.com/",
+            "email": "hello@example.com",
+            "telephone": "+1-555-0100",
+            "priceRange": "$$",
+            "description": "Fine-art landscape and portrait photography, editorial assignments and commissions.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Portland",
+              "addressRegion": "OR",
+              "addressCountry": "US"
+            },
+            "areaServed": "Worldwide",
+            "founder": { "@id": "https://www.example.com/#alex-rivera" },
+            "sameAs": [
+              "https://www.instagram.com/example",
+              "https://www.behance.net/example",
+              "https://www.linkedin.com/in/example"
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://www.example.com/#alex-rivera",
+            "name": "Alex Rivera",
+            "jobTitle": "Photographer",
+            "image": "https://www.example.com/images/portrait.svg",
+            "url": "https://www.example.com/about.html",
+            "worksFor": { "@id": "https://www.example.com/#business" },
+            "knowsAbout": [
+              "Landscape photography",
+              "Portrait photography",
+              "Editorial photography",
+              "Fine-art printing"
+            ],
+            "sameAs": [
+              "https://www.instagram.com/example",
+              "https://www.behance.net/example",
+              "https://www.linkedin.com/in/example"
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html">
+          <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <rect width="32" height="32" rx="7" fill="currentColor" />
+            <g fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round">
+              <circle cx="16" cy="16" r="9" />
+              <path d="M16 7 L20.5 14 H11.5 Z" />
+              <path d="M16 25 L11.5 18 H20.5 Z" opacity="0.85" />
+              <path d="M8.5 11.5 L16 14 L8 15.5 Z" opacity="0.85" />
+            </g>
+          </svg>
+          <span>Alex Rivera</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+        >
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+          <ul role="list">
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero__content">
+          <h1 id="hero-title">Light, land &amp; the people in between</h1>
+          <p class="hero__tagline">
+            Fine-art landscape and portrait photography from Portland, Oregon —
+            available for prints, editorial assignments and commissions.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="gallery.html">View the gallery</a>
+            <a class="button button--ghost" href="contact.html">Start a project</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured work -->
+      <section class="section" aria-labelledby="featured-title">
+        <div class="container">
+          <div class="section__header">
+            <span class="section__eyebrow">Selected work</span>
+            <h2 id="featured-title">Featured photographs</h2>
+            <p class="lead">
+              A small selection from recent series. See the
+              <a href="gallery.html">full gallery</a> for more.
+            </p>
+          </div>
+
+          <ul class="gallery" role="list">
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <a class="gallery__link" href="gallery.html#gallery-01">
+                  <img
+                    class="gallery__image"
+                    src="images/gallery-01.svg"
+                    width="1200"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Sunrise light breaking over a layered mountain ridge.">
+                </a>
+                <figcaption class="gallery__caption">
+                  <span class="gallery__caption-title">Dawn over the Ridge</span>
+                  Landscape
+                </figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <a class="gallery__link" href="gallery.html#gallery-02">
+                  <img
+                    class="gallery__image"
+                    src="images/gallery-02.svg"
+                    width="1200"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                    alt="City harbour at night with lights reflected on still water.">
+                </a>
+                <figcaption class="gallery__caption">
+                  <span class="gallery__caption-title">Harbour Lights</span>
+                  Night
+                </figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item gallery__item--portrait">
+              <figure class="gallery__figure">
+                <a class="gallery__link" href="gallery.html#gallery-03">
+                  <img
+                    class="gallery__image"
+                    src="images/gallery-03.svg"
+                    width="800"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Studio portrait of a person lit with warm side light.">
+                </a>
+                <figcaption class="gallery__caption">
+                  <span class="gallery__caption-title">Studio Portrait No. 4</span>
+                  Portrait
+                </figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <a class="gallery__link" href="gallery.html#gallery-04">
+                  <img
+                    class="gallery__image"
+                    src="images/gallery-04.svg"
+                    width="1200"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Minimal concrete architecture against an open sky.">
+                </a>
+                <figcaption class="gallery__caption">
+                  <span class="gallery__caption-title">Concrete &amp; Sky</span>
+                  Architecture
+                </figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure class="gallery__figure">
+                <a class="gallery__link" href="gallery.html#gallery-06">
+                  <img
+                    class="gallery__image"
+                    src="images/gallery-06.svg"
+                    width="1200"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Mirror-still water reflecting a pale morning sky.">
+                </a>
+                <figcaption class="gallery__caption">
+                  <span class="gallery__caption-title">Still Water</span>
+                  Landscape
+                </figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item gallery__item--portrait">
+              <figure class="gallery__figure">
+                <a class="gallery__link" href="gallery.html#gallery-09">
+                  <img
+                    class="gallery__image"
+                    src="images/gallery-09.svg"
+                    width="800"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Long-exposure street scene with blurred motion at dusk.">
+                </a>
+                <figcaption class="gallery__caption">
+                  <span class="gallery__caption-title">City in Motion</span>
+                  Street
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- About teaser -->
+      <section class="section section--tight" aria-labelledby="about-teaser-title">
+        <div class="container about-grid">
+          <img
+            class="about-portrait"
+            src="images/portrait.svg"
+            width="800"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+            alt="Portrait of photographer Alex Rivera holding a camera.">
+          <div class="prose">
+            <span class="section__eyebrow">About</span>
+            <h2 id="about-teaser-title">Photographs with a sense of place</h2>
+            <p>
+              I am Alex Rivera, a photographer based in the Pacific Northwest. For
+              over a decade I have chased quiet light across coastlines, cities and
+              quiet rooms, making images that feel honest and unhurried.
+            </p>
+            <p>
+              My work has appeared in independent magazines and private collections.
+              I shoot on both digital and film, and hand-finish every print.
+            </p>
+            <p><a class="button button--ghost" href="about.html">More about me</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services / what I shoot -->
+      <section class="section section--tight" aria-labelledby="services-title">
+        <div class="container">
+          <div class="section__header">
+            <span class="section__eyebrow">Services</span>
+            <h2 id="services-title">What I photograph</h2>
+          </div>
+          <ul class="stats" role="list">
+            <li><span class="stats__value">01</span><span class="stats__label">Landscape &amp; fine-art prints</span></li>
+            <li><span class="stats__value">02</span><span class="stats__label">Editorial &amp; portrait sessions</span></li>
+            <li><span class="stats__value">03</span><span class="stats__label">Architecture &amp; interiors</span></li>
+            <li><span class="stats__value">04</span><span class="stats__label">Commissions &amp; licensing</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact CTA -->
+      <section class="section section--tight" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="section__header">
+            <h2 id="cta-title">Let&rsquo;s make something together</h2>
+            <p class="lead">
+              Available for commissions and print sales worldwide.
+            </p>
+          </div>
+          <a class="button button--primary" href="contact.html">Get in touch</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>&copy; <span data-current-year>2026</span> Alex Rivera Photography. All rights reserved.</p>
+        <nav aria-label="Social media">
+          <ul class="social-list" role="list">
+            <li>
+              <a href="https://www.instagram.com/example" rel="me noopener" target="_blank">
+                <span class="visually-hidden">Instagram</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.behance.net/example" rel="me noopener" target="_blank">
+                <span class="visually-hidden">Behance</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M8.3 7.4c1.6 0 2.7.7 2.7 2.3 0 .9-.5 1.5-1.2 1.8.9.3 1.5 1 1.5 2.1 0 1.8-1.4 2.6-3.1 2.6H3.5V7.4h4.8Zm-.3 3.5c.7 0 1.1-.3 1.1-.9 0-.6-.4-.8-1.1-.8H5.7v1.7H8Zm.2 3.7c.8 0 1.2-.3 1.2-1s-.4-1-1.2-1H5.7v2H8.2ZM20.5 9.2h-4.4V8h4.4v1.2Zm-2.2 1.2c2 0 3.2 1.3 3.2 3.4v.5h-4.7c.1.9.7 1.4 1.6 1.4.7 0 1.1-.3 1.4-.8h1.6c-.4 1.3-1.5 2.1-3 2.1-2 0-3.3-1.3-3.3-3.3 0-2 1.3-3.3 3.2-3.3Zm-1.5 2.7h3c-.1-.8-.6-1.3-1.4-1.3-.8 0-1.4.5-1.6 1.3Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/example" rel="me noopener" target="_blank">
+                <span class="visually-hidden">LinkedIn</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M4.98 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3.5 9h3v11h-3V9Zm6 0h2.9v1.5h.04c.4-.75 1.4-1.55 2.86-1.55 3.06 0 3.7 2 3.7 4.6V20h-3v-5.6c0-1.34-.02-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.96V20h-3V9Z" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+  </body>
+</html>
