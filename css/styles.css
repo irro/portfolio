@@ -805,3 +805,318 @@ a:hover {
     scroll-behavior: auto !important;
   }
 }
+
+/* 16. Large displays (HD → 4K) --------------------------------------- */
+/* The fluid type scale and auto-fill grids already adapt; here we let
+   wide screens use more of their width and nudge legibility up on 4K. */
+@media (min-width: 100rem) {
+  :root {
+    --container-max: 88rem;
+  }
+}
+
+@media (min-width: 160rem) {
+  :root {
+    --container-max: 120rem;
+  }
+  html {
+    font-size: 18px;
+  }
+}
+
+/* 17. Globe / map page ----------------------------------------------- */
+:root {
+  --globe-ocean: #e6eef1;
+  --globe-land: #aebfb6;
+  --globe-graticule: #cfdadb;
+  --globe-stroke: #bcccca;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --globe-ocean: #15212b;
+    --globe-land: #33433f;
+    --globe-graticule: #2b3a3a;
+    --globe-stroke: #3a4a4a;
+  }
+}
+
+/* Show the interactive globe only when JS is available; otherwise the
+   static location galleries (the data source) remain visible. */
+html:not(.js) [data-globe-interactive] {
+  display: none;
+}
+
+html.js [data-locations] {
+  display: none;
+}
+
+.globe {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.globe__stage {
+  position: relative;
+  width: 100%;
+  height: clamp(20rem, 60vh, 34rem);
+  background: radial-gradient(
+    circle at 50% 45%,
+    color-mix(in srgb, var(--globe-ocean) 70%, var(--color-bg)),
+    var(--color-bg) 72%
+  );
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+@media (min-width: 48rem) {
+  .globe__stage {
+    height: clamp(28rem, 70vh, 46rem);
+  }
+}
+
+@media (min-width: 100rem) {
+  .globe__stage {
+    height: min(72vh, 56rem);
+  }
+}
+
+.globe__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Prevent the page from scrolling while dragging/pinching on touch. */
+  touch-action: none;
+  cursor: grab;
+}
+
+.globe__svg.is-grabbing {
+  cursor: grabbing;
+}
+
+.globe__sphere {
+  fill: var(--globe-ocean);
+  stroke: var(--globe-stroke);
+  stroke-width: 1;
+}
+
+.globe__graticule {
+  fill: none;
+  stroke: var(--globe-graticule);
+  stroke-width: 0.5;
+}
+
+.globe__land {
+  fill: var(--globe-land);
+  stroke: color-mix(in srgb, var(--globe-land) 70%, #000);
+  stroke-width: 0.4;
+}
+
+.globe__marker {
+  cursor: pointer;
+}
+
+.globe__marker-inner {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--transition);
+}
+
+.globe__marker-dot {
+  fill: var(--color-accent);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.globe__marker-pulse {
+  fill: var(--color-accent);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: globe-pulse 2.6s ease-out infinite;
+}
+
+@keyframes globe-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.globe__marker:hover .globe__marker-inner,
+.globe__marker:focus-visible .globe__marker-inner,
+.globe__marker.is-active .globe__marker-inner {
+  transform: scale(1.5);
+}
+
+.globe__marker:focus-visible .globe__marker-dot {
+  stroke: var(--color-focus);
+  stroke-width: 2.5;
+}
+
+/* Zoom / reset controls overlaid on the stage. */
+.globe__controls {
+  position: absolute;
+  top: var(--space-s);
+  right: var(--space-s);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.globe__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 var(--space-2xs);
+  font-size: var(--step-1);
+  line-height: 1;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.globe__control:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.globe__control--reset {
+  font-size: var(--step--1);
+}
+
+.globe__hint {
+  position: absolute;
+  left: var(--space-s);
+  bottom: var(--space-s);
+  margin: 0;
+  padding: var(--space-3xs) var(--space-2xs);
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+  background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+
+/* Location index — keyboard-friendly list of every location. */
+.globe__index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-s);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+}
+
+.globe__index-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
+  text-align: left;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.globe__index-btn:hover {
+  border-color: var(--color-accent);
+}
+
+.globe__index-name {
+  font-weight: 600;
+}
+
+.globe__index-count {
+  flex-shrink: 0;
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+/* Static location sections (shown when JavaScript is unavailable). */
+.location + .location {
+  margin-top: var(--space-xl);
+}
+
+.location__name {
+  margin-bottom: var(--space-m);
+}
+
+/* Location gallery modal -------------------------------------------- */
+.locgallery {
+  width: min(96vw, 72rem);
+  max-width: 96vw;
+  max-height: 90vh;
+  padding: 0;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.locgallery::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.locgallery__inner {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.locgallery__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-m);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.locgallery__title {
+  margin: 0;
+  font-size: var(--step-2);
+}
+
+.locgallery__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.locgallery__close:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.locgallery__body {
+  padding: var(--space-m);
+  overflow: auto;
+}

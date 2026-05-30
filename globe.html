@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Mark that JS is available before first paint so the static
+         fallback can be hidden without a flash of content. -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <title>Photo Map — Alex Rivera Photography</title>
+    <meta
+      name="description"
+      content="Explore Alex Rivera's photography on an interactive globe. Spin the world, open a location and browse the photos made there.">
+    <link rel="canonical" href="https://www.example.com/globe.html">
+    <meta name="theme-color" content="#0b5757">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alex Rivera Photography">
+    <meta property="og:title" content="Photo Map — Alex Rivera Photography">
+    <meta
+      property="og:description"
+      content="Explore the portfolio on an interactive globe, by location.">
+    <meta property="og:url" content="https://www.example.com/globe.html">
+    <meta property="og:image" content="https://www.example.com/images/og-cover.svg">
+    <meta property="og:image:alt" content="Alex Rivera Photography portfolio cover">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Photo Map — Alex Rivera Photography">
+    <meta
+      name="twitter:description"
+      content="Explore the portfolio on an interactive globe, by location.">
+    <meta name="twitter:image" content="https://www.example.com/images/og-cover.svg">
+
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Structured data: the page plus an ItemList of the photo Places,
+         each with geo-coordinates and a representative image. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "CollectionPage",
+            "@id": "https://www.example.com/globe.html#webpage",
+            "url": "https://www.example.com/globe.html",
+            "name": "Photo Map — Alex Rivera Photography",
+            "inLanguage": "en",
+            "isPartOf": { "@id": "https://www.example.com/#website" },
+            "about": { "@id": "https://www.example.com/#alex-rivera" }
+          },
+          {
+            "@type": "ItemList",
+            "@id": "https://www.example.com/globe.html#locations",
+            "name": "Photo locations",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@type": "Place",
+                  "name": "Reykjavík, Iceland",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 64.15,
+                    "longitude": -21.94
+                  },
+                  "image": "https://www.example.com/images/gallery-01.svg"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@type": "Place",
+                  "name": "Kyoto, Japan",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 35.01,
+                    "longitude": 135.77
+                  },
+                  "image": "https://www.example.com/images/gallery-03.svg"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@type": "Place",
+                  "name": "New York City, USA",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 40.71,
+                    "longitude": -74.01
+                  },
+                  "image": "https://www.example.com/images/gallery-02.svg"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                  "@type": "Place",
+                  "name": "Marrakech, Morocco",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 31.63,
+                    "longitude": -7.99
+                  },
+                  "image": "https://www.example.com/images/gallery-05.svg"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 5,
+                "item": {
+                  "@type": "Place",
+                  "name": "Cape Town, South Africa",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": -33.92,
+                    "longitude": 18.42
+                  },
+                  "image": "https://www.example.com/images/gallery-01.svg"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 6,
+                "item": {
+                  "@type": "Place",
+                  "name": "Queenstown, New Zealand",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": -45.03,
+                    "longitude": 168.66
+                  },
+                  "image": "https://www.example.com/images/gallery-08.svg"
+                }
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.example.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Map",
+                "item": "https://www.example.com/globe.html"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html">
+          <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <rect width="32" height="32" rx="7" fill="currentColor" />
+            <g fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round">
+              <circle cx="16" cy="16" r="9" />
+              <path d="M16 7 L20.5 14 H11.5 Z" />
+              <path d="M16 25 L11.5 18 H20.5 Z" opacity="0.85" />
+              <path d="M8.5 11.5 L16 14 L8 15.5 Z" opacity="0.85" />
+            </g>
+          </svg>
+          <span>Alex Rivera</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+        >
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+          <ul role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="globe.html" aria-current="page">Map</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <nav class="container" aria-label="Breadcrumb">
+      <ol class="breadcrumb" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li aria-current="page">Map</li>
+      </ol>
+    </nav>
+
+    <main id="main">
+      <section class="section section--tight" aria-labelledby="map-title">
+        <div class="container">
+          <div class="section__header">
+            <span class="section__eyebrow">Explore</span>
+            <h1 id="map-title">Photographs around the world</h1>
+            <p class="lead">
+              Spin the globe and open a marker to see the photos made there —
+              or pick a place from the list.
+            </p>
+          </div>
+
+          <div class="globe" data-globe-interactive>
+            <div class="globe__stage" data-globe></div>
+            <div>
+              <h2>All locations</h2>
+              <div data-globe-index></div>
+            </div>
+          </div>
+
+          <noscript>
+            <p>
+              The interactive globe needs JavaScript. All photo locations and
+              their galleries are listed below.
+            </p>
+          </noscript>
+
+          <div class="locations" data-locations>
+            <section class="location" id="loc-reykjavik" data-lat="64.15" data-lng="-21.94">
+              <h2 class="location__name">Reykjavík, Iceland</h2>
+              <ul class="gallery" role="list">
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-01.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-01.svg" width="1200" height="800" loading="lazy" decoding="async" alt="Sunrise light breaking over a layered mountain ridge.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Dawn over the Ridge</span>
+                      Iceland
+                    </figcaption>
+                  </figure>
+                </li>
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-06.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-06.svg" width="1200" height="800" loading="lazy" decoding="async" alt="Mirror-still water reflecting a pale morning sky.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Still Water</span>
+                      Iceland
+                    </figcaption>
+                  </figure>
+                </li>
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-08.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-08.svg" width="1200" height="800" loading="lazy" decoding="async" alt="A field of wildflowers under soft afternoon light.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Wildflower Field</span>
+                      Iceland
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
+            </section>
+
+            <section class="location" id="loc-kyoto" data-lat="35.01" data-lng="135.77">
+              <h2 class="location__name">Kyoto, Japan</h2>
+              <ul class="gallery" role="list">
+                <li class="gallery__item gallery__item--portrait">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-03.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-03.svg" width="800" height="1200" loading="lazy" decoding="async" alt="Studio portrait of a person lit with warm side light.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Studio Portrait No. 4</span>
+                      Japan
+                    </figcaption>
+                  </figure>
+                </li>
+                <li class="gallery__item gallery__item--portrait">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-09.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-09.svg" width="800" height="1200" loading="lazy" decoding="async" alt="Long-exposure street scene with blurred motion at dusk.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">City in Motion</span>
+                      Japan
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
+            </section>
+
+            <section class="location" id="loc-newyork" data-lat="40.71" data-lng="-74.01">
+              <h2 class="location__name">New York City, USA</h2>
+              <ul class="gallery" role="list">
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-02.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-02.svg" width="1200" height="800" loading="lazy" decoding="async" alt="City harbour at night with lights reflected on still water.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Harbour Lights</span>
+                      USA
+                    </figcaption>
+                  </figure>
+                </li>
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-04.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-04.svg" width="1200" height="800" loading="lazy" decoding="async" alt="Minimal concrete architecture against an open sky.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Concrete &amp; Sky</span>
+                      USA
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
+            </section>
+
+            <section class="location" id="loc-marrakech" data-lat="31.63" data-lng="-7.99">
+              <h2 class="location__name">Marrakech, Morocco</h2>
+              <ul class="gallery" role="list">
+                <li class="gallery__item gallery__item--portrait">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-05.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-05.svg" width="800" height="1200" loading="lazy" decoding="async" alt="Vendors at a busy morning street market.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Market Morning</span>
+                      Morocco
+                    </figcaption>
+                  </figure>
+                </li>
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-07.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-07.svg" width="1200" height="800" loading="lazy" decoding="async" alt="Tools and a workbench inside a weathered old workshop.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">The Old Workshop</span>
+                      Morocco
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
+            </section>
+
+            <section class="location" id="loc-capetown" data-lat="-33.92" data-lng="18.42">
+              <h2 class="location__name">Cape Town, South Africa</h2>
+              <ul class="gallery" role="list">
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-01.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-01.svg" width="1200" height="800" loading="lazy" decoding="async" alt="Sunrise light breaking over a layered mountain ridge.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Dawn over the Ridge</span>
+                      South Africa
+                    </figcaption>
+                  </figure>
+                </li>
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-06.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-06.svg" width="1200" height="800" loading="lazy" decoding="async" alt="Mirror-still water reflecting a pale morning sky.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Still Water</span>
+                      South Africa
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
+            </section>
+
+            <section class="location" id="loc-queenstown" data-lat="-45.03" data-lng="168.66">
+              <h2 class="location__name">Queenstown, New Zealand</h2>
+              <ul class="gallery" role="list">
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-08.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-08.svg" width="1200" height="800" loading="lazy" decoding="async" alt="A field of wildflowers under soft afternoon light.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Wildflower Field</span>
+                      New Zealand
+                    </figcaption>
+                  </figure>
+                </li>
+                <li class="gallery__item">
+                  <figure class="gallery__figure">
+                    <a class="gallery__link" href="images/gallery-04.svg" target="_blank" rel="noopener">
+                      <img class="gallery__image" src="images/gallery-04.svg" width="1200" height="800" loading="lazy" decoding="async" alt="Minimal concrete architecture against an open sky.">
+                    </a>
+                    <figcaption class="gallery__caption">
+                      <span class="gallery__caption-title">Concrete &amp; Sky</span>
+                      New Zealand
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Location gallery modal. Populated by js/globe.js; without JS the
+         galleries above are shown directly. -->
+    <dialog id="location-gallery" class="locgallery" aria-labelledby="locgallery-title">
+      <div class="locgallery__inner">
+        <div class="locgallery__head">
+          <h2 class="locgallery__title" id="locgallery-title" data-locgallery-title>Location</h2>
+          <button class="locgallery__close" type="button" data-locgallery-close>
+            <span class="visually-hidden">Close gallery</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="M4 4 L16 16 M16 4 L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div class="locgallery__body" data-locgallery-body></div>
+      </div>
+    </dialog>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>&copy; <span data-current-year>2026</span> Alex Rivera Photography. All rights reserved.</p>
+        <nav aria-label="Social media">
+          <ul class="social-list" role="list">
+            <li>
+              <a href="https://www.instagram.com/example" rel="me noopener" target="_blank">
+                <span class="visually-hidden">Instagram</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.behance.net/example" rel="me noopener" target="_blank">
+                <span class="visually-hidden">Behance</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M8.3 7.4c1.6 0 2.7.7 2.7 2.3 0 .9-.5 1.5-1.2 1.8.9.3 1.5 1 1.5 2.1 0 1.8-1.4 2.6-3.1 2.6H3.5V7.4h4.8Zm-.3 3.5c.7 0 1.1-.3 1.1-.9 0-.6-.4-.8-1.1-.8H5.7v1.7H8Zm.2 3.7c.8 0 1.2-.3 1.2-1s-.4-1-1.2-1H5.7v2H8.2ZM20.5 9.2h-4.4V8h4.4v1.2Zm-2.2 1.2c2 0 3.2 1.3 3.2 3.4v.5h-4.7c.1.9.7 1.4 1.6 1.4.7 0 1.1-.3 1.4-.8h1.6c-.4 1.3-1.5 2.1-3 2.1-2 0-3.3-1.3-3.3-3.3 0-2 1.3-3.3 3.2-3.3Zm-1.5 2.7h3c-.1-.8-.6-1.3-1.4-1.3-.8 0-1.4.5-1.6 1.3Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/example" rel="me noopener" target="_blank">
+                <span class="visually-hidden">LinkedIn</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M4.98 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3.5 9h3v11h-3V9Zm6 0h2.9v1.5h.04c.4-.75 1.4-1.55 2.86-1.55 3.06 0 3.7 2 3.7 4.6V20h-3v-5.6c0-1.34-.02-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.96V20h-3V9Z" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Shared behaviours (mobile nav, footer year), then the globe stack:
+         vendored d3-array + d3-geo (self-hosted, no external CDN), the
+         generated land data, and the globe script. defer keeps order. -->
+    <script src="js/main.js" defer></script>
+    <script src="js/vendor/d3-array.min.js" defer></script>
+    <script src="js/vendor/d3-geo.min.js" defer></script>
+    <script src="js/globe-data.js" defer></script>
+    <script src="js/globe.js" defer></script>
+  </body>
+</html>

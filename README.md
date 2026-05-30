@@ -1,10 +1,14 @@
 # Photography Portfolio
 
-A lightweight, dependency-free framework for a photographer's portfolio
-website. It is built with hand-authored, standards-compliant **HTML5 and
-CSS**, a small amount of progressive-enhancement **JavaScript**, and ships
-with **WCAG 2.1 AA** accessibility and **Schema.org** structured data baked
-in.
+A lightweight framework for a photographer's portfolio website. It is built
+with hand-authored, standards-compliant **HTML5 and CSS** and a small amount
+of progressive-enhancement **JavaScript**, with **WCAG 2.1 AA** accessibility
+and **Schema.org** structured data baked in. It is responsive from phones up
+to 4K displays.
+
+The core pages have **no dependencies**. The interactive globe on the map page
+self-hosts one small library (`d3-geo`) plus an embedded world outline, so even
+that makes **no external/CDN requests**.
 
 There is no build step and no framework to learn — open the files, replace
 the placeholder content, and deploy.
@@ -15,12 +19,17 @@ the placeholder content, and deploy.
 portfolio/
 ├── index.html            # Home: hero, featured work, about teaser, services, CTA
 ├── gallery.html          # Full gallery with an accessible lightbox
+├── globe.html            # Interactive globe / photo map by location
 ├── about.html            # About the photographer
 ├── contact.html          # Contact form + details
 ├── css/
-│   └── styles.css         # Design system (tokens), layout, components, dark mode
+│   └── styles.css         # Design tokens, layout, components, dark mode, globe, 4K
 ├── js/
-│   └── main.js            # Mobile nav toggle, lightbox, copyright year
+│   ├── main.js            # Mobile nav toggle, lightbox, copyright year
+│   ├── globe.js           # Interactive globe + location gallery modal
+│   ├── globe-data.js      # GENERATED world land outline (do not edit by hand)
+│   ├── build-globe-data.mjs  # Regenerates globe-data.js from the world-atlas package
+│   └── vendor/            # Self-hosted d3-array + d3-geo (UMD) — no external CDN
 ├── images/
 │   ├── favicon.svg        # Aperture logo / favicon
 │   ├── hero.svg           # Hero background placeholder
@@ -126,6 +135,60 @@ After wiring it up, consider showing a success/error message on submit.
 do not render SVG share images — for best results, export a **1200×630 JPG or
 PNG** and update the `og:image` / `twitter:image` URLs.
 
+## The map / globe page
+
+`globe.html` shows an interactive 3D-looking globe (an orthographic projection
+rendered with `d3-geo`) with a marker at every photo location. Drag to rotate,
+scroll/pinch to zoom, and the `+` / `−` / **Reset** buttons also control it.
+Activating a marker — or a button in the **All locations** list — opens an
+accessible `<dialog>` gallery of that place's photos.
+
+### Adding or editing locations
+
+The locations are **read straight from the markup** in `globe.html`, inside the
+`<div data-locations>` block, so that block is the single source of truth (and
+the no-JavaScript fallback). To add a place, copy a `<section class="location">`
+and edit:
+
+- `data-lat` / `data-lng` — the coordinates in decimal degrees (north and east
+  positive; south and west negative).
+- `<h2 class="location__name">` — the place name shown on the marker and modal.
+- the `<ul class="gallery">` — one `<li class="gallery__item">` per photo (add
+  `gallery__item--portrait` for tall images). These are normal gallery figures.
+
+The globe markers, the index list and the modal are all generated from those
+sections — there is nothing else to keep in sync. (Optionally mirror new places
+in the `ItemList` JSON-LD for richer search results.)
+
+### The world map data
+
+`js/globe-data.js` is a **generated** file containing the world land outline
+(Natural Earth 110m, from the `world-atlas` npm package). To regenerate it:
+
+```bash
+npm i -D world-atlas topojson-client
+node js/build-globe-data.mjs
+```
+
+`js/vendor/` holds the self-hosted `d3-array` and `d3-geo` builds. Nothing is
+loaded from a CDN. Without JavaScript, the globe is skipped and the location
+galleries are shown as normal sections.
+
+## Responsive design
+
+Every page is fluid from small phones up to 4K monitors:
+
+- A fluid type scale (`clamp()`) and intrinsic `auto-fill` grids mean galleries
+  add columns as space allows, with no fixed breakpoints to fight.
+- The navigation collapses into a toggle menu below ~768px.
+- Wide-screen breakpoints at **100rem** and **160rem** widen the content
+  container and nudge base font size up so 4K displays aren't mostly margin.
+- The globe sizes itself to its container via `ResizeObserver`, and the photo
+  galleries reflow to a single column on phones.
+
+Test quickly with your browser's device toolbar (responsive mode) at, e.g.,
+375px (phone), 768px (tablet), 1440px (HD) and 2560px+ (4K).
+
 ## Accessibility features
 
 - Semantic landmarks (`header`, `nav`, `main`, `footer`) and one `<h1>` per page.
@@ -140,9 +203,13 @@ PNG** and update the `og:image` / `twitter:image` URLs.
 - A labelled contact form with hints wired up via `aria-describedby`.
 - Colour contrast meets WCAG 2.1 AA in both light and dark schemes.
 - Honours `prefers-reduced-motion` and `prefers-color-scheme`.
+- On the map page, every globe marker is a focusable `role="button"`, and the
+  **All locations** list gives a keyboard- and screen-reader-friendly path to
+  the same galleries.
 
 The site is fully usable with JavaScript disabled: the navigation stays
-visible and gallery thumbnails open the full image directly.
+visible, gallery thumbnails open the full image directly, and the map page
+falls back to listing every location with its photos.
 
 ## Structured data (Schema.org / JSON-LD)
 
@@ -152,6 +219,7 @@ Each page embeds a JSON-LD `@graph` so search engines understand the content:
 | -------------- | ----- |
 | `index.html`   | `WebSite`, `ProfessionalService`, `Person` |
 | `gallery.html` | `ImageGallery` + `ImageObject` (with licensing metadata), `BreadcrumbList` |
+| `globe.html`   | `CollectionPage`, `ItemList` of `Place` (+ `GeoCoordinates`), `BreadcrumbList` |
 | `about.html`   | `AboutPage`, `Person`, `BreadcrumbList` |
 | `contact.html` | `ContactPage`, `ProfessionalService` + `ContactPoint`, `BreadcrumbList` |
 
@@ -165,7 +233,7 @@ The markup validates against the W3C HTML specification. If you'd like to
 lint it yourself:
 
 ```bash
-npx html-validate index.html gallery.html about.html contact.html
+npx html-validate index.html gallery.html globe.html about.html contact.html
 ```
 
 A small `.htmlvalidate.json` ships with the project. It disables the
