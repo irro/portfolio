@@ -962,6 +962,34 @@ html.js [data-locations] {
   stroke-width: 2.5;
 }
 
+/* Cluster bubble shown when several markers overlap on screen. */
+.globe__cluster {
+  cursor: pointer;
+}
+
+.globe__cluster-bg {
+  fill: var(--color-accent);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.globe__cluster-count {
+  fill: var(--color-on-accent);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.globe__cluster:hover .globe__cluster-bg,
+.globe__cluster:focus-visible .globe__cluster-bg {
+  fill: var(--color-accent-hover);
+}
+
+.globe__cluster:focus-visible .globe__cluster-bg {
+  stroke: var(--color-focus);
+  stroke-width: 3;
+}
+
 /* Zoom / reset controls overlaid on the stage. */
 .globe__controls {
   position: absolute;

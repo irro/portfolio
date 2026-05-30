@@ -246,9 +246,28 @@ roles removed.
 
 ## Deploying
 
-Upload the folder to any static host — GitHub Pages, Netlify, Cloudflare
-Pages, Vercel, or plain object storage / a web server. No server-side runtime
-is required.
+No server-side runtime is required — host the folder anywhere static.
+
+### GitHub Pages (included)
+
+A ready-to-use workflow ships at `.github/workflows/deploy-pages.yml`. To turn
+it on:
+
+1. In the repository, go to **Settings → Pages → Build and deployment** and set
+   **Source** to **GitHub Actions**.
+2. Push to the default branch (`main`) — merge this branch into `main` if you
+   developed on a feature branch. The workflow then builds and deploys the site
+   automatically (you can also trigger it from the **Actions** tab).
+
+The `.nojekyll` file disables Jekyll processing so every file is served as-is.
+
+> Prefer no workflow? You can instead use **Settings → Pages → Deploy from a
+> branch**, pick your branch and the `/ (root)` folder.
+
+### Other hosts
+
+Netlify, Cloudflare Pages, Vercel, or any web server / object storage all work
+— just upload the folder.
 
 ## License
 

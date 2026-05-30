@@ -2,14 +2,17 @@
    Alex Rivera Photography — interactive globe
    ---------------------------------------------------------------------
    Renders an orthographic (3D-looking) globe with d3-geo and places a
-   marker at every photo location. The locations are read from the
-   static markup in the page (the [data-locations] block), so that block
-   is the single source of truth and also the no-JavaScript fallback.
+   marker at every photo location. Locations are read from the static
+   markup ([data-locations]), so that block is the single source of truth
+   and the no-JavaScript fallback.
 
-   Interaction is built on Pointer Events, so drag-to-rotate and
-   pinch-to-zoom work identically with a mouse, touch or pen. Activating
-   a marker (click / Enter / Space) — or a button in the location index —
+   Features: drag to rotate, wheel/pinch to zoom, gentle auto-rotation
+   until the user interacts, and screen-space clustering of nearby markers
+   when zoomed out. Activating a marker (or a button in the location list)
    opens an accessible <dialog> gallery of that location's photos.
+
+   Interaction uses Pointer Events so it behaves the same with a mouse,
+   touch or pen. Honours prefers-reduced-motion (no auto-rotation).
    ===================================================================== */
 (function () {
   "use strict";
@@ -40,19 +43,20 @@
   var prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
+  var CLUSTER_PX = 38; // markers closer than this on screen are grouped
 
   /* ---- Read locations from the DOM -------------------------------- */
   var locations = Array.prototype.map.call(
     locationsRoot.querySelectorAll(".location"),
-    function (el) {
-      var nameEl = el.querySelector(".location__name");
+    function (node) {
+      var nameEl = node.querySelector(".location__name");
       return {
-        id: el.id,
-        name: nameEl ? nameEl.textContent.trim() : el.id,
-        lat: parseFloat(el.getAttribute("data-lat")),
-        lng: parseFloat(el.getAttribute("data-lng")),
-        gallery: el.querySelector(".gallery"),
-        count: el.querySelectorAll(".gallery__item").length
+        id: node.id,
+        name: nameEl ? nameEl.textContent.trim() : node.id,
+        lat: parseFloat(node.getAttribute("data-lat")),
+        lng: parseFloat(node.getAttribute("data-lng")),
+        gallery: node.querySelector(".gallery"),
+        count: node.querySelectorAll(".gallery__item").length
       };
     }
   ).filter(function (loc) {
@@ -106,6 +110,7 @@
   // Start centred on the first location.
   var initialRotate = [-locations[0].lng, -locations[0].lat];
   var rotate = initialRotate.slice();
+  var moved = false; // set true while dragging, to suppress the click
 
   /* ---- Markers ---------------------------------------------------- */
   locations.forEach(function (loc) {
@@ -146,6 +151,72 @@
     });
   });
 
+  /* ---- Cluster pool (reused across renders, so focus is stable) --- */
+  var clusterPool = [];
+  for (var p = 0; p < locations.length; p++) {
+    clusterPool.push(makeCluster());
+  }
+
+  function makeCluster() {
+    var g = el("g", "globe__cluster");
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("role", "button");
+    g.style.display = "none";
+    var bg = el("circle", "globe__cluster-bg");
+    bg.setAttribute("r", "14");
+    var text = el("text", "globe__cluster-count");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("dy", "0.34em");
+    g.appendChild(bg);
+    g.appendChild(text);
+    markersGroup.appendChild(g);
+
+    var entry = { el: g, count: text, targetRotate: null };
+    var activate = function () {
+      if (moved || !entry.targetRotate) {
+        return;
+      }
+      stopSpin();
+      setZoom(zoom * 1.8);
+      animateRotation(entry.targetRotate.slice());
+    };
+    g.addEventListener("click", activate);
+    g.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+        event.preventDefault();
+        activate();
+      }
+    });
+    return entry;
+  }
+
+  /* ---- Clustering ------------------------------------------------- */
+  // Greedy single-pass grouping of visible markers within CLUSTER_PX.
+  function buildClusters(visible) {
+    var clusters = [];
+    var used = new Array(visible.length);
+    for (var i = 0; i < visible.length; i++) {
+      if (used[i]) {
+        continue;
+      }
+      var members = [visible[i]];
+      used[i] = true;
+      for (var j = i + 1; j < visible.length; j++) {
+        if (used[j]) {
+          continue;
+        }
+        var dx = visible[i].x - visible[j].x;
+        var dy = visible[i].y - visible[j].y;
+        if (dx * dx + dy * dy < CLUSTER_PX * CLUSTER_PX) {
+          members.push(visible[j]);
+          used[j] = true;
+        }
+      }
+      clusters.push(members);
+    }
+    return clusters;
+  }
+
   /* ---- Rendering -------------------------------------------------- */
   var rafId = null;
   function scheduleRender() {
@@ -169,19 +240,47 @@
     landPath.setAttribute("d", geoPath(land) || "");
 
     var center = [-rotate[0], -rotate[1]];
+    var visible = [];
     locations.forEach(function (loc) {
       var point = projection([loc.lng, loc.lat]);
-      var visible =
+      var isVisible =
         point && d3.geoDistance([loc.lng, loc.lat], center) < Math.PI / 2 - 1e-3;
-      if (visible) {
-        loc.marker.style.display = "";
-        loc.marker.setAttribute(
-          "transform",
-          "translate(" + point[0] + "," + point[1] + ")"
-        );
-      } else {
-        loc.marker.style.display = "none";
+      loc.marker.style.display = "none"; // shown below if a singleton
+      if (isVisible) {
+        visible.push({ loc: loc, x: point[0], y: point[1] });
       }
+    });
+
+    for (var c = 0; c < clusterPool.length; c++) {
+      clusterPool[c].el.style.display = "none";
+    }
+
+    var clusters = buildClusters(visible);
+    var poolIndex = 0;
+    clusters.forEach(function (members) {
+      if (members.length === 1) {
+        var m = members[0];
+        m.loc.marker.style.display = "";
+        m.loc.marker.setAttribute("transform", "translate(" + m.x + "," + m.y + ")");
+        return;
+      }
+      var entry = clusterPool[poolIndex++];
+      var sx = 0;
+      var sy = 0;
+      var slat = 0;
+      var slng = 0;
+      members.forEach(function (m) {
+        sx += m.x;
+        sy += m.y;
+        slat += m.loc.lat;
+        slng += m.loc.lng;
+      });
+      var n = members.length;
+      entry.el.style.display = "";
+      entry.el.setAttribute("transform", "translate(" + sx / n + "," + sy / n + ")");
+      entry.count.textContent = String(n);
+      entry.el.setAttribute("aria-label", n + " locations here; activate to zoom in");
+      entry.targetRotate = [-(slng / n), -(slat / n)];
     });
   }
 
@@ -205,10 +304,60 @@
     scheduleRender();
   }
 
+  /* ---- Auto-rotation ---------------------------------------------- */
+  var spinning = false;
+  var spinRAF = null;
+  var spinLast = 0;
+  var SPIN_SPEED = 0.004; // degrees per millisecond (~4°/s)
+  var spinButton = null;
+
+  function spinFrame(now) {
+    if (!spinning) {
+      spinRAF = null;
+      return;
+    }
+    if (spinLast) {
+      rotate[0] += SPIN_SPEED * (now - spinLast);
+      render();
+    }
+    spinLast = now;
+    spinRAF = requestAnimationFrame(spinFrame);
+  }
+
+  function startSpin() {
+    if (prefersReduced || spinning) {
+      return;
+    }
+    spinning = true;
+    spinLast = 0;
+    updateSpinButton();
+    spinRAF = requestAnimationFrame(spinFrame);
+  }
+
+  function stopSpin() {
+    if (!spinning) {
+      return;
+    }
+    spinning = false;
+    if (spinRAF) {
+      cancelAnimationFrame(spinRAF);
+      spinRAF = null;
+    }
+    updateSpinButton();
+  }
+
+  function updateSpinButton() {
+    if (!spinButton) {
+      return;
+    }
+    spinButton.setAttribute("aria-pressed", String(spinning));
+    spinButton.setAttribute("aria-label", spinning ? "Pause rotation" : "Start rotation");
+    spinButton.textContent = spinning ? "⏸" : "▶";
+  }
+
   /* ---- Pointer interaction (rotate + pinch zoom) ------------------ */
   var pointers = new Map();
   var dragging = false;
-  var moved = false;
   var last = null;
   var pinchStartDist = 0;
   var pinchStartZoom = 1;
@@ -248,6 +397,7 @@
     if (event.pointerType === "mouse" && event.button !== 0) {
       return; // ignore non-primary mouse buttons
     }
+    stopSpin();
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     stopAnimation();
 
@@ -316,6 +466,7 @@
     "wheel",
     function (event) {
       event.preventDefault();
+      stopSpin();
       stopAnimation();
       var factor = event.deltaY < 0 ? 1.12 : 1 / 1.12;
       setZoom(zoom * factor);
@@ -323,7 +474,7 @@
     { passive: false }
   );
 
-  /* ---- Animated rotation (used by the index list) ----------------- */
+  /* ---- Animated rotation (index list + cluster zoom) -------------- */
   var animId = null;
   function stopAnimation() {
     if (animId) {
@@ -336,10 +487,9 @@
     return ((to - from + 540) % 360) - 180;
   }
 
-  function rotateTo(loc) {
-    var target = [-loc.lng, -loc.lat];
+  function animateRotation(target) {
     if (prefersReduced) {
-      rotate = target;
+      rotate = target.slice();
       scheduleRender();
       return;
     }
@@ -364,13 +514,17 @@
     animId = requestAnimationFrame(step);
   }
 
+  function rotateTo(loc) {
+    animateRotation([-loc.lng, -loc.lat]);
+  }
+
   function setActiveMarker(loc, active) {
     if (loc.marker) {
       loc.marker.classList.toggle("is-active", active);
     }
   }
 
-  /* ---- Controls (zoom in / out / reset) --------------------------- */
+  /* ---- Controls (zoom, reset, rotation toggle) -------------------- */
   function makeControl(label, text, modifier, onClick) {
     var button = document.createElement("button");
     button.type = "button";
@@ -385,24 +539,37 @@
   controls.className = "globe__controls";
   controls.appendChild(
     makeControl("Zoom in", "+", null, function () {
+      stopSpin();
       stopAnimation();
       setZoom(zoom * 1.3);
     })
   );
   controls.appendChild(
     makeControl("Zoom out", "−", null, function () {
+      stopSpin();
       stopAnimation();
       setZoom(zoom / 1.3);
     })
   );
   controls.appendChild(
     makeControl("Reset view", "Reset", "globe__control--reset", function () {
+      stopSpin();
       stopAnimation();
       rotate = initialRotate.slice();
       zoom = 1;
       scheduleRender();
     })
   );
+  if (!prefersReduced) {
+    spinButton = makeControl("Pause rotation", "⏸", "globe__control--spin", function () {
+      if (spinning) {
+        stopSpin();
+      } else {
+        startSpin();
+      }
+    });
+    controls.appendChild(spinButton);
+  }
   stage.appendChild(controls);
 
   var hint = document.createElement("p");
@@ -433,6 +600,7 @@
     button.appendChild(count);
 
     var preview = function () {
+      stopSpin();
       rotateTo(loc);
       setActiveMarker(loc, true);
     };
@@ -459,6 +627,7 @@
   var lastOpener = null;
 
   function openLocation(loc, opener) {
+    stopSpin();
     lastOpener = opener || null;
     dialogTitle.textContent = loc.name;
     dialogBody.textContent = "";
@@ -495,4 +664,5 @@
     window.addEventListener("resize", measure);
   }
   measure();
+  startSpin();
 })();
