@@ -23,24 +23,26 @@ portfolio/
 ├── about.html            # About the photographer
 ├── contact.html          # Contact form + details
 ├── css/
-│   └── styles.css         # Design tokens, layout, components, dark mode, globe, 4K
+│   └── styles.css        # Design tokens, layout, components, dark mode, globe, 4K
 ├── js/
-│   ├── main.js            # Mobile nav toggle, lightbox, copyright year
-│   ├── globe.js           # Interactive globe + location gallery modal
-│   ├── globe-data.js      # GENERATED world land outline (do not edit by hand)
-│   ├── build-globe-data.mjs  # Regenerates globe-data.js from the world-atlas package
-│   └── vendor/            # Self-hosted d3-array + d3-geo (UMD) — no external CDN
+│   ├── main.js           # Mobile nav toggle, lightbox, copyright year
+│   ├── globe.js          # 2D SVG globe: markers, clustering, auto-spin, modal
+│   ├── globe-3d.js       # Optional WebGL earth (lazy-loaded when "3D" is chosen)
+│   ├── globe-data.js     # GENERATED world land outline (do not edit by hand)
+│   ├── build-globe-data.mjs  # Regenerates globe-data.js from world-atlas
+│   └── vendor/           # Self-hosted d3-array, d3-geo and three.js — no external CDN
 ├── images/
-│   ├── favicon.svg        # Aperture logo / favicon
-│   ├── hero.svg           # Hero background placeholder
-│   ├── portrait.svg       # About-page portrait placeholder
-│   ├── og-cover.svg       # Social-share image placeholder
+│   ├── favicon.svg       # Aperture logo / favicon
+│   ├── hero.svg          # Hero background placeholder
+│   ├── portrait.svg      # About-page placeholder portrait
+│   ├── og-cover.svg      # Social-share image placeholder
 │   ├── gallery-01..09.svg # Gallery image placeholders
 │   └── generate-placeholders.mjs  # Regenerates the placeholders above
-├── site.webmanifest       # PWA manifest
-├── robots.txt             # Crawler directives
-├── sitemap.xml            # XML sitemap
-├── .htmlvalidate.json     # Optional html-validate config (see Validation)
+├── .github/workflows/    # GitHub Pages deploy workflow
+├── site.webmanifest      # PWA manifest
+├── robots.txt            # Crawler directives
+├── sitemap.xml           # XML sitemap
+├── .htmlvalidate.json    # Optional html-validate config (see Validation)
 └── README.md
 ```
 
@@ -173,6 +175,24 @@ node js/build-globe-data.mjs
 `js/vendor/` holds the self-hosted `d3-array` and `d3-geo` builds. Nothing is
 loaded from a CDN. Without JavaScript, the globe is skipped and the location
 galleries are shown as normal sections.
+
+### 3D earth (the "3D" button)
+
+When the browser supports WebGL, a **3D** button appears on the globe. It
+lazy-loads `js/globe-3d.js` (a textured Three.js earth) **only when clicked**,
+so the Three.js payload is never downloaded for visitors who don't use it. The
+2D SVG globe is the default; if WebGL or the module fails to load, it simply
+stays on the 2D globe. The 3D view reuses the same markers, clustering, modal
+and auto-rotation.
+
+By default the earth texture is drawn from the same land data as the 2D globe
+(clean, offline, no image asset). To use a **photorealistic satellite image**
+instead, pass an equirectangular JPG/PNG to the renderer — in `js/globe.js`
+find `mod.createGlobe3D({` and add `textureUrl: "images/earth.jpg"` to the
+options.
+
+Three.js is vendored in `js/vendor/three/` (no CDN). It is the one heavier
+dependency, which is why it is loaded on demand rather than up front.
 
 ## Responsive design
 

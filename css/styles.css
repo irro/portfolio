@@ -990,6 +990,85 @@ html.js [data-locations] {
   stroke-width: 3;
 }
 
+/* WebGL (3D) globe layer — canvas + HTML overlay for accessible pins. */
+.globe__controls,
+.globe__hint {
+  z-index: 2;
+}
+
+.globe__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.globe__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* the pins below re-enable pointer events */
+}
+
+.globe__pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.globe__pin:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.globe__pin-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0, 0, 0, 0.25);
+  transition: transform var(--transition);
+}
+
+.globe__pin:hover .globe__pin-dot,
+.globe__pin:focus-visible .globe__pin-dot {
+  transform: scale(1.25);
+}
+
+.globe__pin--cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.globe__control--3d {
+  white-space: nowrap;
+}
+
+/* In 3D mode the WebGL globe has its own drag/zoom, so hide the 2D-only
+   controls; the 2D/3D toggle stays visible. */
+.globe__stage.is-3d .globe__control--2d {
+  display: none;
+}
+
 /* Zoom / reset controls overlaid on the stage. */
 .globe__controls {
   position: absolute;

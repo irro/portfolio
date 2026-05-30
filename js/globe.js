@@ -538,21 +538,21 @@
   var controls = document.createElement("div");
   controls.className = "globe__controls";
   controls.appendChild(
-    makeControl("Zoom in", "+", null, function () {
+    makeControl("Zoom in", "+", "globe__control--2d", function () {
       stopSpin();
       stopAnimation();
       setZoom(zoom * 1.3);
     })
   );
   controls.appendChild(
-    makeControl("Zoom out", "−", null, function () {
+    makeControl("Zoom out", "−", "globe__control--2d", function () {
       stopSpin();
       stopAnimation();
       setZoom(zoom / 1.3);
     })
   );
   controls.appendChild(
-    makeControl("Reset view", "Reset", "globe__control--reset", function () {
+    makeControl("Reset view", "Reset", "globe__control--reset globe__control--2d", function () {
       stopSpin();
       stopAnimation();
       rotate = initialRotate.slice();
@@ -561,7 +561,7 @@
     })
   );
   if (!prefersReduced) {
-    spinButton = makeControl("Pause rotation", "⏸", "globe__control--spin", function () {
+    spinButton = makeControl("Pause rotation", "⏸", "globe__control--spin globe__control--2d", function () {
       if (spinning) {
         stopSpin();
       } else {
@@ -570,6 +570,88 @@
     });
     controls.appendChild(spinButton);
   }
+  // --- 3D (WebGL) toggle: lazy-loads js/globe-3d.js on demand --------
+  // The 2D SVG globe above is the verified default. If WebGL is available
+  // we offer a "3D" button that swaps in a textured Three.js earth; the
+  // heavy library is only downloaded when the visitor opts in. Any failure
+  // leaves the 2D globe in place.
+  var globe3d = null;
+
+  function webglAvailable() {
+    try {
+      var canvas = document.createElement("canvas");
+      return !!(
+        window.WebGLRenderingContext &&
+        (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+      );
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function readPalette() {
+    var cs = getComputedStyle(document.documentElement);
+    var get = function (name, fallback) {
+      return (cs.getPropertyValue(name) || "").trim() || fallback;
+    };
+    return {
+      ocean: get("--globe-ocean", "#0d1b2a"),
+      land: get("--globe-land", "#3a4a3f"),
+      landStroke: get("--globe-stroke", "#2a3a3a"),
+      atmosphere: get("--color-accent", "#4fd1c5")
+    };
+  }
+
+  if (webglAvailable()) {
+    var toggle3d = makeControl("View in 3D", "3D", "globe__control--3d", function () {
+      if (globe3d) {
+        globe3d.destroy();
+        globe3d = null;
+        stage.classList.remove("is-3d");
+        svg.style.display = "";
+        toggle3d.textContent = "3D";
+        toggle3d.setAttribute("aria-label", "View in 3D");
+        toggle3d.setAttribute("aria-pressed", "false");
+        scheduleRender();
+        return;
+      }
+      toggle3d.disabled = true;
+      import(new URL("js/globe-3d.js", document.baseURI).href)
+        .then(function (mod) {
+          stopSpin();
+          globe3d = mod.createGlobe3D({
+            stage: stage,
+            locations: locations,
+            d3: d3,
+            land: land,
+            onActivate: openLocation,
+            buildClusters: buildClusters,
+            prefersReduced: prefersReduced,
+            palette: readPalette()
+          });
+          stage.classList.add("is-3d");
+          svg.style.display = "none";
+          toggle3d.textContent = "2D";
+          toggle3d.setAttribute("aria-label", "View in 2D");
+          toggle3d.setAttribute("aria-pressed", "true");
+        })
+        .catch(function () {
+          if (globe3d) {
+            globe3d.destroy();
+            globe3d = null;
+          }
+          stage.classList.remove("is-3d");
+          svg.style.display = "";
+          hint.textContent = "3D view is unavailable on this device.";
+        })
+        .then(function () {
+          toggle3d.disabled = false;
+        });
+    });
+    toggle3d.setAttribute("aria-pressed", "false");
+    controls.appendChild(toggle3d);
+  }
+
   stage.appendChild(controls);
 
   var hint = document.createElement("p");
@@ -628,6 +710,9 @@
 
   function openLocation(loc, opener) {
     stopSpin();
+    if (globe3d) {
+      globe3d.setSpinning(false);
+    }
     lastOpener = opener || null;
     dialogTitle.textContent = loc.name;
     dialogBody.textContent = "";
