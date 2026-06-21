@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>NYC 8 Ball — Ask it what to do in New York</title>
+  <meta name="description" content="Shake the NYC 8 Ball for a random free or cheap thing to do in New York City — $50 per person or less, transit excluded." />
+  <meta name="theme-color" content="#0b0c10" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-ball" aria-hidden="true">8</span>
+      <span class="brand-text">NYC&nbsp;8&nbsp;Ball</span>
+    </div>
+    <a class="admin-link" href="/admin.html">Admin</a>
+  </header>
+
+  <main class="stage">
+    <h1 class="headline">What should I do in <span>New York</span> today?</h1>
+    <p class="subhead">Shake the ball for a random free or cheap thing to do — <strong>$50&nbsp;a&nbsp;person or less</strong>, transit not included.</p>
+
+    <button class="ball" id="ball" type="button" aria-label="Shake the 8 ball for an idea">
+      <span class="ball-shine" aria-hidden="true"></span>
+      <span class="ball-window" id="window">
+        <span class="triangle">
+          <span class="answer-state answer-idle" id="idle">
+            <span class="big-8">8</span>
+            <span class="tap-hint">tap to shake</span>
+          </span>
+          <span class="answer-state answer-content" id="answer" hidden>
+            <span class="answer-cost" id="answerCost"></span>
+            <span class="answer-title" id="answerTitle"></span>
+            <span class="answer-meta" id="answerMeta"></span>
+          </span>
+          <span class="answer-state answer-thinking" id="thinking" hidden>
+            <span class="dots"><i></i><i></i><i></i></span>
+          </span>
+        </span>
+      </span>
+    </button>
+
+    <section class="detail" id="detail" hidden aria-live="polite">
+      <p class="detail-desc" id="detailDesc"></p>
+      <a class="detail-link" id="detailLink" href="#" target="_blank" rel="noopener" hidden>More info →</a>
+    </section>
+
+    <button class="again" id="again" type="button" hidden>Shake again 🎱</button>
+
+    <p class="error" id="error" hidden></p>
+  </main>
+
+  <footer class="site-footer">
+    <span id="stats"></span>
+    <span class="dot">·</span>
+    <span>Costs are per person and exclude transit. Verify hours &amp; prices before you go.</span>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

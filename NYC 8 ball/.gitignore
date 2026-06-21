@@ -1,0 +1,7 @@
+# Live data store — created on first run from data/seed.json.
+# Ignored so each environment keeps its own edits; the seed is the source of truth.
+data/db.json
+
+node_modules/
+*.log
+.DS_Store

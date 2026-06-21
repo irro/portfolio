@@ -1,0 +1,578 @@
+[
+  {
+    "title": "Ride the Staten Island Ferry",
+    "description": "Hop the free 24/7 ferry for unbeatable harbor views of the Statue of Liberty, Ellis Island and the Lower Manhattan skyline. Round trip, no ticket required.",
+    "category": "Views & Landmarks",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.siferry.com/"
+  },
+  {
+    "title": "Wander Central Park",
+    "description": "843 free acres. Hit Bethesda Terrace & Fountain, Bow Bridge, Strawberry Fields and the Mall. Pack a picnic and disappear for an afternoon.",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.centralparknyc.org/"
+  },
+  {
+    "title": "Walk the High Line",
+    "description": "A 1.45-mile elevated rail line turned park in the sky on Manhattan's West Side, with gardens, art and skyline views. Open daily, free.",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.thehighline.org/"
+  },
+  {
+    "title": "Cross the Brooklyn Bridge on foot",
+    "description": "Walk the 1.1-mile pedestrian path between Manhattan and Brooklyn for iconic skyline and East River views. Open 24/7, completely free.",
+    "category": "Views & Landmarks",
+    "borough": "Multiple",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.nyc.gov/html/dot/html/bridges/brooklyn-bridge.shtml"
+  },
+  {
+    "title": "Visit MoMA PS1",
+    "description": "The MoMA's bold contemporary-art offshoot in Long Island City is free for everyone as of January 2026. Cutting-edge installations in a former schoolhouse.",
+    "category": "Museums & Culture",
+    "borough": "Queens",
+    "cost": 0,
+    "costNote": "Free for all (2026)",
+    "url": "https://www.moma.org/ps1/"
+  },
+  {
+    "title": "The Bronx Museum of the Arts",
+    "description": "Contemporary and 20th-century art with a focus on diverse, local artists. Admission is always free.",
+    "category": "Museums & Culture",
+    "borough": "Bronx",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.bronxmuseum.org/"
+  },
+  {
+    "title": "Queens Museum",
+    "description": "Home to the jaw-dropping Panorama of the City of New York, a 9,335-sq-ft scale model of all five boroughs. Suggested admission, pay what you wish.",
+    "category": "Museums & Culture",
+    "borough": "Queens",
+    "cost": 0,
+    "costNote": "Pay what you wish",
+    "url": "https://queensmuseum.org/"
+  },
+  {
+    "title": "National Museum of the American Indian",
+    "description": "Smithsonian museum inside the beautiful Beaux-Arts Customs House at Bowling Green. Native art and history, always free.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://americanindian.si.edu/visit/newyork"
+  },
+  {
+    "title": "Socrates Sculpture Park",
+    "description": "An outdoor museum and public park on the Queens waterfront with large-scale sculpture, East River views and free programming.",
+    "category": "Parks & Outdoors",
+    "borough": "Queens",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://socratessculpturepark.org/"
+  },
+  {
+    "title": "Explore Grand Central Terminal",
+    "description": "Marvel at the celestial ceiling, test the Whispering Gallery, and find the hidden tennis court. A free architectural masterpiece.",
+    "category": "Views & Landmarks",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.grandcentralterminal.com/"
+  },
+  {
+    "title": "New York Public Library — Main Branch",
+    "description": "Step inside the Stephen A. Schwarzman Building, see the stunning Rose Main Reading Room and the lion-guarded steps. Free to enter.",
+    "category": "Views & Landmarks",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.nypl.org/locations/schwarzman"
+  },
+  {
+    "title": "Browse Chelsea Market",
+    "description": "A former Nabisco factory packed with food stalls, shops and art. Free to wander; grab a snack if you like.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free to enter",
+    "url": "https://www.chelseamarket.com/"
+  },
+  {
+    "title": "Relax in Prospect Park",
+    "description": "Brooklyn's 526-acre answer to Central Park: meadows, a lake, the Long Meadow and a free zoo-adjacent ramble. Designed by Olmsted & Vaux.",
+    "category": "Parks & Outdoors",
+    "borough": "Brooklyn",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.prospectpark.org/"
+  },
+  {
+    "title": "Roam Green-Wood Cemetery",
+    "description": "478 acres of Gothic arches, rolling hills and Battle Hill — one of Brooklyn's highest points. Historic, peaceful and free to walk.",
+    "category": "Parks & Outdoors",
+    "borough": "Brooklyn",
+    "cost": 0,
+    "costNote": "Free to enter",
+    "url": "https://www.green-wood.com/"
+  },
+  {
+    "title": "Brooklyn Heights Promenade",
+    "description": "A short waterfront walkway with postcard views of the Lower Manhattan skyline, Brooklyn Bridge and the harbor. Free, and best at sunset.",
+    "category": "Views & Landmarks",
+    "borough": "Brooklyn",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.nycgovparks.org/parks/brooklyn-heights-promenade"
+  },
+  {
+    "title": "People-watch in Washington Square Park",
+    "description": "The heart of Greenwich Village: the iconic arch, the fountain, chess hustlers, street musicians and a piano that shows up out of nowhere. Free.",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.washingtonsquareparkconservancy.org/"
+  },
+  {
+    "title": "Gallery-hop in Chelsea",
+    "description": "Hundreds of contemporary art galleries between 10th & 11th Avenues, most with free admission and rotating shows. Thursday evenings are liveliest.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free to enter",
+    "url": "https://www.chelseagallerymap.com/"
+  },
+  {
+    "title": "FDR Four Freedoms Park",
+    "description": "A serene Louis Kahn-designed memorial at the tip of Roosevelt Island with framed views of the UN and Midtown. Free (the tram ride is transit).",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Always free",
+    "url": "https://www.fdrfourfreedomspark.org/"
+  },
+  {
+    "title": "MoMA — Free Friday Nights",
+    "description": "The Museum of Modern Art is free to all every Friday evening (5:30–9pm), courtesy of UNIQLO. See Van Gogh's Starry Night without the ticket price.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free Fridays 5:30–9pm (otherwise ~$30)",
+    "url": "https://www.moma.org/"
+  },
+  {
+    "title": "Brooklyn Museum — First Saturdays",
+    "description": "Free admission plus live music, art and programming on the first Saturday evening of most months (5–11pm). A legendary Brooklyn night out.",
+    "category": "Museums & Culture",
+    "borough": "Brooklyn",
+    "cost": 0,
+    "costNote": "Free First Saturdays 5–11pm",
+    "url": "https://www.brooklynmuseum.org/"
+  },
+  {
+    "title": "Whitney Museum — Pay-What-You-Wish Fridays",
+    "description": "American art with Hudson River views and a great rooftop. Pay what you wish every Friday 5–10pm and the second Sunday of the month; free under 25.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Pay what you wish Fri 5–10pm",
+    "url": "https://whitney.org/"
+  },
+  {
+    "title": "The Met — Pay What You Wish (NY residents)",
+    "description": "One of the world's great museums. New York State residents (and NY/NJ/CT students) pay what they wish; everyone else, suggested ~$30.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Pay what you wish for NY residents (else ~$30)",
+    "url": "https://www.metmuseum.org/"
+  },
+  {
+    "title": "American Museum of Natural History",
+    "description": "Dinosaurs, the blue whale, the planetarium and more. NY/NJ/CT residents pay what you wish; otherwise general admission is about $28.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Pay what you wish for NY/NJ/CT residents (else ~$28)",
+    "url": "https://www.amnh.org/"
+  },
+  {
+    "title": "El Museo del Barrio",
+    "description": "The nation's leading Latino and Latin American cultural institution, on Museum Mile in East Harlem. Pay what you wish for all.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Pay what you wish",
+    "url": "https://www.elmuseo.org/"
+  },
+  {
+    "title": "Guggenheim — Pay-What-You-Wish Saturdays",
+    "description": "Frank Lloyd Wright's spiraling icon. Pay what you wish Saturday evenings (suggested ~$10, minimum $1). Walk down the famous rotunda ramp.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Pay what you wish Sat evenings (suggested $10)",
+    "url": "https://www.guggenheim.org/"
+  },
+  {
+    "title": "The Met Cloisters",
+    "description": "Medieval art and gardens in a monastery-like setting overlooking the Hudson in Fort Tryon Park. Pay what you wish for NY State residents.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Pay what you wish for NY residents (else ~$30)",
+    "url": "https://www.metmuseum.org/visit/plan-your-visit/met-cloisters"
+  },
+  {
+    "title": "Eat your way down Arthur Avenue",
+    "description": "The real Little Italy in the Bronx: bakeries, cheese shops, the indoor Arthur Avenue Retail Market and old-school butchers. Free to browse, cheap to nibble.",
+    "category": "Neighborhood Walks",
+    "borough": "Bronx",
+    "cost": 0,
+    "costNote": "Free to wander",
+    "url": "https://www.arthuravenuebronx.com/"
+  },
+  {
+    "title": "Coney Island Boardwalk & beach",
+    "description": "Stroll the historic boardwalk, dip your toes in the Atlantic, watch the Wonder Wheel and Cyclone, and people-watch. Beach and boardwalk are free.",
+    "category": "Parks & Outdoors",
+    "borough": "Brooklyn",
+    "cost": 0,
+    "costNote": "Free (rides cost extra)",
+    "url": "https://www.coneyisland.com/"
+  },
+  {
+    "title": "Rockaway Beach day",
+    "description": "NYC's surf beach — miles of sand reachable by subway. Boardwalk, concessions and great people-watching. Free.",
+    "category": "Parks & Outdoors",
+    "borough": "Queens",
+    "cost": 0,
+    "costNote": "Free",
+    "url": "https://www.nycgovparks.org/parks/rockaway-beach-and-boardwalk"
+  },
+  {
+    "title": "Graze at Smorgasburg",
+    "description": "The country's largest weekly open-air food market — dozens of vendors in Williamsburg and Prospect Park (seasonal). Free to enter; budget ~$20 to taste your way through.",
+    "category": "Markets & Food Halls",
+    "borough": "Brooklyn",
+    "cost": 20,
+    "costNote": "Free entry; ~$20 to eat",
+    "url": "https://www.smorgasburg.com/"
+  },
+  {
+    "title": "Little Island",
+    "description": "A whimsical floating park on the Hudson at Pier 55, built on tulip-shaped concrete pillars, with lawns, overlooks and a free amphitheater.",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free",
+    "url": "https://littleisland.org/"
+  },
+  {
+    "title": "Domino Park",
+    "description": "A sleek waterfront park on the site of the old Domino Sugar Refinery in Williamsburg, with skyline views, a taco stand and an elevated walkway.",
+    "category": "Parks & Outdoors",
+    "borough": "Brooklyn",
+    "cost": 0,
+    "costNote": "Free",
+    "url": "https://www.dominopark.com/"
+  },
+  {
+    "title": "The Battery & Bowling Green",
+    "description": "Waterfront gardens at Manhattan's southern tip with views of Lady Liberty, the SeaGlass Carousel and the city's oldest public park. Free to walk.",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free",
+    "url": "https://www.thebattery.org/"
+  },
+  {
+    "title": "Chinatown & Little Italy walk",
+    "description": "Wind through Manhattan's most flavorful blocks: produce markets, tea shops, Columbus Park, Mott Street and the bones of old Little Italy. Free to roam.",
+    "category": "Neighborhood Walks",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free to wander",
+    "url": "https://www.explorechinatown.com/"
+  },
+  {
+    "title": "DUMBO & the Washington Street view",
+    "description": "Cobblestone streets, the Manhattan Bridge framed between brick buildings (the famous photo spot), Brooklyn Bridge Park and the Jane's Carousel. Free.",
+    "category": "Neighborhood Walks",
+    "borough": "Brooklyn",
+    "cost": 0,
+    "costNote": "Free to wander",
+    "url": "https://dumbo.is/"
+  },
+  {
+    "title": "Greenwich Village walk",
+    "description": "Tree-lined townhouse blocks, jazz history, hidden mews and the famous corners of NYU and Bleecker Street. One of the city's best free strolls.",
+    "category": "Neighborhood Walks",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free to wander",
+    "url": "https://www.villagepreservation.org/"
+  },
+  {
+    "title": "Riverside Park",
+    "description": "A four-mile ribbon of green along the Hudson on the Upper West Side, with the 79th Street Boat Basin, gardens and sunset views. Free.",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free",
+    "url": "https://riversideparknyc.org/"
+  },
+  {
+    "title": "Flushing Chinatown food crawl",
+    "description": "Arguably NYC's best and cheapest Asian eats. Hit the New World Mall food court and Golden Mall — soup dumplings, hand-pulled noodles, lamb skewers, all a few dollars each.",
+    "category": "Neighborhood Walks",
+    "borough": "Queens",
+    "cost": 15,
+    "costNote": "~$15 to feast",
+    "url": "https://www.nyctourism.com/flushing/"
+  },
+  {
+    "title": "The Oculus at the World Trade Center",
+    "description": "Santiago Calatrava's soaring white rib-cage of a transit hub and mall. Free to walk through; striking from every angle.",
+    "category": "Views & Landmarks",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Free",
+    "url": "https://www.westfield.com/en/united-states/worldtradecenter"
+  },
+  {
+    "title": "9/11 Memorial pools",
+    "description": "The twin reflecting pools set in the footprints of the original towers, ringed by the victims' names. The outdoor memorial plaza is free (the museum is ticketed).",
+    "category": "Views & Landmarks",
+    "borough": "Manhattan",
+    "cost": 0,
+    "costNote": "Memorial plaza free",
+    "url": "https://www.911memorial.org/visit/memorial"
+  },
+  {
+    "title": "New York Botanical Garden — Free Wednesdays",
+    "description": "250 acres of gardens and old-growth forest in the Bronx. Grounds admission is free to all on Wednesdays (and all day Wed for NYC residents).",
+    "category": "Parks & Outdoors",
+    "borough": "Bronx",
+    "cost": 0,
+    "costNote": "Grounds free Wednesdays",
+    "url": "https://www.nybg.org/"
+  },
+  {
+    "title": "Brooklyn Botanic Garden",
+    "description": "52 acres including the cherry esplanade, Japanese garden and conservatory. Free on winter weekdays; otherwise about $18.",
+    "category": "Parks & Outdoors",
+    "borough": "Brooklyn",
+    "cost": 18,
+    "costNote": "~$18 (free winter weekdays)",
+    "url": "https://www.bbg.org/"
+  },
+  {
+    "title": "Free kayaking on the Hudson",
+    "description": "Free 20-minute walk-up kayaking in protected embayments from spring–fall, courtesy of the Downtown Boathouse and Brooklyn Bridge Park Boathouse. No experience needed.",
+    "category": "Parks & Outdoors",
+    "borough": "Multiple",
+    "cost": 0,
+    "costNote": "Free (seasonal)",
+    "url": "https://downtownboathouse.org/"
+  },
+  {
+    "title": "Governors Island day trip",
+    "description": "A car-free island park in the harbor with hammocks, art, the Hills slides and 360° skyline views. Ferry is ~$4 round trip and free before noon on weekend mornings.",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 4,
+    "costNote": "~$4 ferry (free weekend mornings)",
+    "url": "https://www.govisland.com/"
+  },
+  {
+    "title": "Top of the Rock observation deck",
+    "description": "Open-air observation atop Rockefeller Center with the best straight-on view of the Empire State Building and Central Park. Around $40.",
+    "category": "Views & Landmarks",
+    "borough": "Manhattan",
+    "cost": 40,
+    "costNote": "~$40 / person",
+    "url": "https://www.topoftherocknyc.com/"
+  },
+  {
+    "title": "Empire State Building — 86th-floor deck",
+    "description": "The classic NYC observatory. The 86th-floor open-air deck runs about $44 for adults — book a timed ticket online to skip lines.",
+    "category": "Views & Landmarks",
+    "borough": "Manhattan",
+    "cost": 44,
+    "costNote": "~$44 / person (86th floor)",
+    "url": "https://www.esbnyc.com/"
+  },
+  {
+    "title": "Row a boat in Central Park",
+    "description": "Rent a rowboat at the Loeb Boathouse and paddle the lake under Bow Bridge. About $25–30 per hour per boat (splits up to 4 people).",
+    "category": "Parks & Outdoors",
+    "borough": "Manhattan",
+    "cost": 25,
+    "costNote": "~$25/hr per boat (up to 4)",
+    "url": "https://www.thecentralparkboathouse.com/"
+  },
+  {
+    "title": "Score a Broadway rush ticket",
+    "description": "Most shows release a few same-day discounted tickets each morning at the box office or via the TodayTix app — typically $30–49. A real Broadway seat for cheap.",
+    "category": "Entertainment & Shows",
+    "borough": "Manhattan",
+    "cost": 40,
+    "costNote": "~$30–49 rush",
+    "url": "https://www.todaytix.com/nyc/category/rush-tickets"
+  },
+  {
+    "title": "Win the Hamilton $10 lottery",
+    "description": "Enter the official Hamilton digital lottery for a shot at front-row seats for just $10. Enter daily in the app; winners notified that day.",
+    "category": "Entertainment & Shows",
+    "borough": "Manhattan",
+    "cost": 10,
+    "costNote": "$10 if you win the lottery",
+    "url": "https://hamiltonmusical.com/lottery/"
+  },
+  {
+    "title": "Carnegie Hall rush tickets",
+    "description": "World-class music for ten bucks: Carnegie Hall offers $10 rush tickets for many Stern Auditorium / Perelman Stage concerts, available the day of.",
+    "category": "Entertainment & Shows",
+    "borough": "Manhattan",
+    "cost": 10,
+    "costNote": "$10 rush",
+    "url": "https://www.carnegiehall.org/"
+  },
+  {
+    "title": "Catch a UCB / indie comedy show",
+    "description": "NYC's improv and stand-up scene is cheap and electric. Many shows at indie clubs run $5–15 — you might catch a future star (or a current one dropping in).",
+    "category": "Entertainment & Shows",
+    "borough": "Manhattan",
+    "cost": 12,
+    "costNote": "~$5–15",
+    "url": "https://www.timeout.com/newyork/comedy"
+  },
+  {
+    "title": "New York Transit Museum",
+    "description": "Housed in a decommissioned 1936 subway station in Brooklyn Heights, with vintage subway cars you can board. Admission about $10.",
+    "category": "Museums & Culture",
+    "borough": "Brooklyn",
+    "cost": 10,
+    "costNote": "~$10",
+    "url": "https://www.nytransitmuseum.org/"
+  },
+  {
+    "title": "Cheap seats at a Mets game",
+    "description": "Catch baseball at Citi Field — upper-deck and promotional tickets regularly start under $20. Hot dog optional but encouraged.",
+    "category": "Entertainment & Shows",
+    "borough": "Queens",
+    "cost": 20,
+    "costNote": "From under $20",
+    "url": "https://www.mlb.com/mets/tickets"
+  },
+  {
+    "title": "Museum of the City of New York",
+    "description": "The whole story of NYC, from its origins to now, including the excellent 'New York at Its Core' exhibit. Free on Wednesdays; otherwise about $23.",
+    "category": "Museums & Culture",
+    "borough": "Manhattan",
+    "cost": 23,
+    "costNote": "~$23 (free Wednesdays)",
+    "url": "https://www.mcny.org/"
+  },
+  {
+    "title": "New York Aquarium",
+    "description": "On the Coney Island boardwalk: sharks, sea otters, a coral reef and an oceanfront setting. Admission around $30; combine it with a beach day.",
+    "category": "Entertainment & Shows",
+    "borough": "Brooklyn",
+    "cost": 30,
+    "costNote": "~$30",
+    "url": "https://nyaquarium.com/"
+  },
+  {
+    "title": "Bronx Zoo — Pay-What-You-Wish Wednesdays",
+    "description": "One of the world's great zoos, 265 acres in the Bronx. Pay what you wish all day Wednesday (otherwise ~$40). Don't miss the Congo Gorilla Forest.",
+    "category": "Entertainment & Shows",
+    "borough": "Bronx",
+    "cost": 0,
+    "costNote": "Pay what you wish Wednesdays (else ~$40)",
+    "url": "https://bronxzoo.com/"
+  },
+  {
+    "title": "Ice skate at Bryant Park",
+    "description": "In winter, The Rink at Bryant Park has FREE admission — just bring or rent skates (~$20). Surrounded by the Winter Village holiday market.",
+    "category": "Entertainment & Shows",
+    "borough": "Manhattan",
+    "cost": 20,
+    "costNote": "Free admission; ~$20 skate rental",
+    "url": "https://bryantpark.org/amenities/the-rink"
+  },
+  {
+    "title": "Grab a classic Joe's Pizza slice",
+    "description": "The quintessential NYC plain slice — foldable, greasy, perfect — for around $4 at this Greenwich Village institution. The cheapest great meal in town.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 4,
+    "costNote": "~$4 a slice",
+    "url": "https://www.joespizzanyc.com/"
+  },
+  {
+    "title": "Xi'an Famous Foods noodles",
+    "description": "Hand-ripped, hand-pulled noodles and spicy cumin lamb burgers across several locations. A huge, addictive bowl for about $12.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 12,
+    "costNote": "~$12",
+    "url": "https://www.xianfoods.com/"
+  },
+  {
+    "title": "Chinatown dumpling run",
+    "description": "At spots like Jin Mei or Shu Jiao Fu Zhou you can get a plate of pork-and-chive dumplings for just a few dollars. Five bucks is a full lunch.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 5,
+    "costNote": "~$5",
+    "url": "https://www.nyctourism.com/chinatown/"
+  },
+  {
+    "title": "A proper NYC bagel",
+    "description": "A fresh bagel with cream cheese (or a bacon-egg-and-cheese) from a classic spot like Russ & Daughters or any great corner shop — around $5–6.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 6,
+    "costNote": "~$5–6",
+    "url": "https://www.russanddaughters.com/"
+  },
+  {
+    "title": "The Halal Guys platter",
+    "description": "The famous chicken-and-rice platter (don't forget the white and hot sauce) from the cart that started it all, at 53rd & 6th. About $10.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 10,
+    "costNote": "~$10",
+    "url": "https://thehalalguys.com/"
+  },
+  {
+    "title": "A Levain Bakery cookie",
+    "description": "The legendary six-ounce, gooey-in-the-middle chocolate-chip-walnut cookie. About $5 of pure indulgence; worth the line.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 5,
+    "costNote": "~$5",
+    "url": "https://levainbakery.com/"
+  },
+  {
+    "title": "Split a Katz's pastrami sandwich",
+    "description": "The towering hand-cut pastrami on rye from the 1888 Lower East Side deli (yes, the 'When Harry Met Sally' one). Around $30 — easily split between two.",
+    "category": "Markets & Food Halls",
+    "borough": "Manhattan",
+    "cost": 30,
+    "costNote": "~$30 (splits in two)",
+    "url": "https://katzsdelicatessen.com/"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "nyc-8-ball",
+  "version": "1.0.0",
+  "description": "A Magic 8 Ball that gives you a random free or cheap thing to do in NYC ($50/person or less, transit excluded), with an admin panel to manage the responses.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
